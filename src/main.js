@@ -9,7 +9,7 @@ form.onsubmit = event => {
   showResult(main, form, inputs.nutrientsKcal, result)
 }
 function showResult  (container, sibling, nutrients, result) {
-  const previous = document.querySelector('results-display')
+  const previous = document.querySelector('.results-display')
   if (previous) container.removeChild(previous)
   const resultDisplay = document.createElement('div')
   resultDisplay.classList.add('results-display')
