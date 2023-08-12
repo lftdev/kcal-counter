@@ -8,5 +8,5 @@ form.onsubmit = event => {
   const inputs = getInputs()
   const result = getTotalKcals(inputs.foodAmount, inputs.servingSize, inputs.macrosKcalAmount)
   removePreviousOutput(main)
-  showResult(main, form, inputs.macrosKcalAmount, result)
+  showResult(main, inputs.macrosKcalAmount, result)
 }

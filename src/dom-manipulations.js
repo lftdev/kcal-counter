@@ -1,11 +1,11 @@
 export function removePreviousOutput (container) {
-  const previous = document.querySelector('.results-display')
+  const previous = document.getElementById('results-display')
   if (previous) container.removeChild(previous)
 }
-export function showResult (container, sibling, macros, result) {
+export function showResult (container, macros, result) {
   const resultDisplay = document.createElement('div')
-  resultDisplay.classList.add('results-display')
-  container.insertBefore(resultDisplay, sibling)
+  resultDisplay.id = 'results-display'
+  container.appendChild(resultDisplay)
 
   const { proteins, carbs, fats } = macros
   resultDisplay.innerHTML = `
