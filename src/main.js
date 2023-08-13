@@ -1,5 +1,5 @@
 import { getTotalKcals } from './counter.js'
-import { removePreviousOutput, showResult } from './dom-manipulations.js'
+import { populateList, removePreviousOutput, showResult } from './dom-manipulations.js'
 import './style.css'
 
 const data = {
@@ -11,6 +11,8 @@ const data = {
 }
 
 const main = document.querySelector('main')
+
+populateList(document.getElementById('templatesList'))
 
 const inputs = document.querySelectorAll('input[type="number"]')
 inputs.forEach(input => {
