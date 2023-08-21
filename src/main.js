@@ -1,15 +1,7 @@
 import { getTotalKcals } from './counter.js'
 import { populateList, removePreviousOutput, showResult } from './dom-manipulations.js'
-import { restoreData } from './local-storage.js'
+import { importLocalStorageData, saveToLocalStorage } from './local-storage.js'
 import './style.css'
-
-const data = {
-  servingSize: 0,
-  foodAmount: 0,
-  proteins: 0,
-  carbs: 0,
-  fats: 0
-}
 
 const main = document.querySelector('main')
 
@@ -20,12 +12,14 @@ const inputs = document.querySelectorAll('input[type="number"]')
 inputs.forEach(input => {
   input.oninput = () => {
     data[input.name] = parseInt(input.value)
-    window.localStorage.setItem('data', JSON.stringify(data))
+    saveToLocalStorage('data', data)
   }
 })
-// Restore local storage data
+
+const data = importLocalStorageData(Array.from(inputs).map(input => input.name))
 inputs.forEach(input => {
-  restoreData(input)
+  const newValue = data[input.name]
+  input.value = newValue === 0 ? '' : newValue
 })
 
 const form = document.querySelector('form')
