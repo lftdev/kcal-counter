@@ -26,5 +26,5 @@ const form = document.querySelector('form')
 form.onsubmit = event => {
   event.preventDefault()
   removePreviousOutput(main)
-  showResult(main, data.proteins, data.carbs, data.fats, getTotalKcals(data))
+  showResult({ ...data, totalKcals: getTotalKcals(data) })
 }
