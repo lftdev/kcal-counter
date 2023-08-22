@@ -11,7 +11,11 @@ populateList(templatesList)
 const inputs = document.querySelectorAll('input[type="number"]')
 inputs.forEach(input => {
   input.oninput = () => {
-    data[input.name] = parseInt(input.value)
+    const inputName = input.name
+    let value = parseInt(input.value)
+    if (inputName === 'proteins' || inputName === 'carbs') value *= 4
+    else if (inputName === 'fats') value *= 9
+    data[inputName] = value
     saveToLocalStorage('data', data)
   }
 })
