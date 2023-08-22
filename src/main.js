@@ -1,9 +1,7 @@
 import { getTotalKcals } from './counter.js'
-import { populateList, removePreviousOutput, showResult } from './dom-manipulations.js'
+import { populateList, showResult } from './dom-manipulations.js'
 import { importLocalStorageData, saveToLocalStorage } from './local-storage.js'
 import './style.css'
-
-const main = document.querySelector('main')
 
 const templatesList = document.getElementById('templatesList')
 populateList(templatesList)
@@ -29,6 +27,5 @@ inputs.forEach(input => {
 const form = document.querySelector('form')
 form.onsubmit = event => {
   event.preventDefault()
-  removePreviousOutput(main)
   showResult({ ...data, totalKcals: getTotalKcals(data) })
 }
