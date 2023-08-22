@@ -6,43 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <title>Calories counter</title>
-    <script type="module" crossorigin src="./assets/index-68eccce7.js"></script>
-    <link rel="stylesheet" href="./assets/index-265a0f62.css">
+    <script type="module" crossorigin src="/assets/index-01f8eddf.js"></script>
+    <link rel="stylesheet" href="/assets/index-8d35dd8a.css">
   </head>
   <body>
-    <div id="app">
-      <main class="flex flex-col gap-8 relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md p-5 bg-slate-50 max-w-md">
+    <div id="app" class="grid place-items-center">
+      <div class="flex flex-col gap-8 rounded-md p-5 bg-slate-50 max-w-md">
         <header>
           <h1 class="text-6xl">Calories counter</h1>
         </header>
-        <form class="flex flex-col max-w-[300px]">
-          <select id="templatesList">
-            <option value="none">None</option>
-          </select>
-          <label class="flex flex-col">
-            Serving size (g)
-            <input class="p-5 border rounded-md" type="number" placeholder="100" name="servingSize">
-          </label>
-          <label class="flex flex-col">
-            How much are you going to eat? (g)
-            <input class="p-5 border rounded-md" type="number" placeholder="250" name="foodAmount">
-          </label>
-          <label class="flex flex-col">
-            Protein amount per serving (g)
-            <input class="p-5 border rounded-md" type="number" placeholder="12" name="proteins">
-          </label>
-          <label class="flex flex-col">
-            Carbs amount per serving (g)
-            <input class="p-5 border rounded-md" type="number" placeholder="60" name="carbs">
-          </label>
-          <label class="flex flex-col">
-            Fats amount per serving (g)
-            <input class="p-5 border rounded-md" type="number" placeholder="12" name="fats">
-          </label>
-          <input type="submit" value="Calculate new food" class="bg-[#D64045] text-white rounded-md">
-        </form>
-      </main>
-    </div>
+          <form class="flex flex-col max-w-[300px]">
+            <select id="templatesList">
+              <option value="none">None</option>
+            </select>
+            <label class="flex flex-col">
+              Serving size (g)
+              <input class="p-5 border rounded-md" type="number" placeholder="100" name="servingSize">
+            </label>
+            <label class="flex flex-col">
+              How much are you going to eat? (g)
+              <input class="p-5 border rounded-md" type="number" placeholder="250" name="foodAmount">
+            </label>
+            <label class="flex flex-col">
+              Protein amount per serving (g)
+              <input class="p-5 border rounded-md" type="number" placeholder="12" name="proteins">
+            </label>
+            <label class="flex flex-col">
+              Carbs amount per serving (g)
+              <input class="p-5 border rounded-md" type="number" placeholder="60" name="carbs">
+            </label>
+            <label class="flex flex-col">
+              Fats amount per serving (g)
+              <input class="p-5 border rounded-md" type="number" placeholder="12" name="fats">
+            </label>
+            <input type="submit" value="Calculate new food" class="bg-[#D64045] text-white rounded-md">
+          </form>
+        </div>
+      </div>
     
   </body>
 </html>
