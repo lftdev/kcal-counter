@@ -1,14 +1,5 @@
 import MessageBox from './components/MessageBox'
 
-export function populateList (list) {
-  import('./templates.json').then(Templates => {
-    Object.keys(Templates).forEach(key => {
-      const option = document.createElement('option')
-      option.innerText = key
-      list.appendChild(option)
-    })
-  })
-}
 export function showResult (result) {
   const { servingSize, foodAmount, proteins, carbs, fats, totalKcals } = result
 
