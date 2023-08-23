@@ -14,28 +14,25 @@
           <h1 class="text-6xl">Calories counter</h1>
         </header>
           <form class="flex flex-col max-w-[300px]">
-            <select id="templatesList">
-              <option value="none">None</option>
-            </select>
             <label class="flex flex-col">
               Serving size (g)
-              <input class="p-5 border rounded-md" type="number" placeholder="100" name="servingSize">
+              <input class="p-5 border rounded-md" type="number" step="0.01" placeholder="100" name="servingSize">
             </label>
             <label class="flex flex-col">
               How much are you going to eat? (g)
-              <input class="p-5 border rounded-md" type="number" placeholder="250" name="foodAmount">
+              <input class="p-5 border rounded-md" type="number" step="0.01" placeholder="250" name="foodAmount">
             </label>
             <label class="flex flex-col">
               Protein amount per serving (g)
-              <input class="p-5 border rounded-md" type="number" placeholder="12" name="proteins">
+              <input class="p-5 border rounded-md" type="number" step="0.01" placeholder="12" name="proteins">
             </label>
             <label class="flex flex-col">
               Carbs amount per serving (g)
-              <input class="p-5 border rounded-md" type="number" placeholder="60" name="carbs">
+              <input class="p-5 border rounded-md" type="number" step="0.01" placeholder="60" name="carbs">
             </label>
             <label class="flex flex-col">
               Fats amount per serving (g)
-              <input class="p-5 border rounded-md" type="number" placeholder="12" name="fats">
+              <input class="p-5 border rounded-md" type="number" step="0.01" placeholder="12" name="fats">
             </label>
             <input type="submit" value="Calculate new food" class="bg-[#D64045] text-white rounded-md">
           </form>
