@@ -1,7 +1,8 @@
 export default function MessageBox (props) {
   const { className, title, message, children, onBtnClick } = props
   const background = document.createElement('div')
-  background.classList = 'bg-[rgba(0,0,0,.8)]'
+  background.onclick = onBtnClick
+  background.classList = 'absolute grid place-items-center bg-[rgba(0,0,0,.8)] w-full h-full'
   const box = document.createElement('div')
   box.classList = className
   box.innerHTML = `
