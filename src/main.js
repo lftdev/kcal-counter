@@ -1,3 +1,4 @@
+import Food from './classes/Food.js'
 import ComboBox from './components/ComboBox.js'
 import { getTotalKcals } from './counter.js'
 import { showResult } from './dom-manipulations.js'
@@ -29,38 +30,19 @@ form.onsubmit = event => {
   showResult({ ...data, totalKcals: getTotalKcals(data) })
 }
 
-const templatesList = (await fetchFruitsList()).items
+const templatesList = (await fetchFruitsList()).items.map(item => new Food(item.name, item.protein_g, item.carbohydrates_total_g, item.fat_total_g))
 function onComboBoxChange (value) {
-  let index = 0
-  templatesList.some((template, idx) => {
-    if (template.name === value) {
-      index = idx
-      return true
-    }
-    return false
+  const selectedTemplate = templatesList[templatesList.findIndex(item => item.name === value)]
+  const setData = (k, v) => { data[k] = v }
+  Object.entries(selectedTemplate).forEach(([key, val]) => {
+    if (key === 'proteins' || key === 'carbs') setData(key, val * 4)
+    else if (key === 'fats') setData(key, val * 9)
   })
-  const template = templatesList[index]
-  Object.entries(template).forEach(([key, val]) => {
-    if (key === 'protein_g') data.proteins = val * 4
-    else if (key === 'carbohydrates_total_g') data.carbs = val * 4
-    else if (key === 'fat_total_g') data.fats = val * 9
-    else if (key === 'serving_size_g') data.servingSize = val
-  })
+  data.servingSize = 100
   saveToLocalStorage('data', data)
   inputs.forEach(input => {
-    switch (input.name) {
-      case 'servingSize':
-        input.value = template.serving_size_g
-        break
-      case 'proteins':
-        input.value = template.protein_g
-        break
-      case 'carbs':
-        input.value = template.carbohydrates_total_g
-        break
-      case 'fats':
-        input.value = template.fat_total_g
-    }
+    const name = input.name
+    if (name !== 'foodAmount') input.value = selectedTemplate[input.name]
   })
 }
 form.insertBefore(ComboBox('p-2', templatesList, onComboBoxChange), form.firstChild)
