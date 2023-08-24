@@ -10,39 +10,41 @@ const inputs = document.querySelectorAll('input[type="number"]')
 inputs.forEach(input => {
   input.oninput = () => {
     const inputName = input.name
-    let value = parseInt(input.value)
-    if (inputName === 'proteins' || inputName === 'carbs') value *= 4
-    else if (inputName === 'fats') value *= 9
-    data[inputName] = value
-    saveToLocalStorage('data', data)
+    foodData[inputName] = parseInt(input.value)
+    saveToLocalStorage('foodData', foodData)
   }
 })
 
-const data = importLocalStorageData(Array.from(inputs).map(input => input.name))
+const foodData = importLocalStorageData('foodData') ?? { servingSize: 0, foodAmount: 0, proteins: 0, carbs: 0, fats: 0 }
 inputs.forEach(input => {
-  const newValue = data[input.name]
+  const newValue = foodData[input.name]
   input.value = newValue === 0 ? '' : newValue
 })
 
 const form = document.querySelector('form')
 form.onsubmit = event => {
   event.preventDefault()
-  showResult({ ...data, totalKcals: getTotalKcals(data) })
+  const result = foodData
+  result.proteins *= 4
+  result.carbs *= 4
+  result.fats *= 9
+  showResult({ ...result, totalKcals: getTotalKcals(result) })
 }
 
 const templatesList = (await fetchFruitsList()).items.map(item => new Food(item.name, item.protein_g, item.carbohydrates_total_g, item.fat_total_g))
 function onComboBoxChange (value) {
-  const selectedTemplate = templatesList[templatesList.findIndex(item => item.name === value)]
-  const setData = (k, v) => { data[k] = v }
-  Object.entries(selectedTemplate).forEach(([key, val]) => {
-    if (key === 'proteins' || key === 'carbs') setData(key, val * 4)
-    else if (key === 'fats') setData(key, val * 9)
-  })
-  data.servingSize = 100
-  saveToLocalStorage('data', data)
-  inputs.forEach(input => {
-    const name = input.name
-    if (name !== 'foodAmount') input.value = selectedTemplate[input.name]
-  })
+  if (value !== 'none') {
+    const selectedTemplate = templatesList[templatesList.findIndex(item => item.name === value)]
+    // Refresh saved data
+    Object.keys(foodData).forEach(key => {
+      if (key !== 'foodAmount') foodData[key] = selectedTemplate[key]
+    })
+    saveToLocalStorage('foodData', foodData)
+    // Refresh inputs
+    inputs.forEach(input => {
+      const name = input.name
+      if (name !== 'foodAmount') input.value = selectedTemplate[input.name]
+    })
+  }
 }
 form.insertBefore(ComboBox('p-2', templatesList, onComboBoxChange), form.firstChild)
