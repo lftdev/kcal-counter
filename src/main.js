@@ -40,6 +40,13 @@ function onComboBoxChange (value) {
     return false
   })
   const template = templatesList[index]
+  Object.entries(template).forEach(([key, val]) => {
+    if (key === 'protein_g') data.proteins = val * 4
+    else if (key === 'carbohydrates_total_g') data.carbs = val * 4
+    else if (key === 'fat_total_g') data.fats = val * 9
+    else if (key === 'serving_size_g') data.servingSize = val
+  })
+  saveToLocalStorage('data', data)
   inputs.forEach(input => {
     switch (input.name) {
       case 'servingSize':
