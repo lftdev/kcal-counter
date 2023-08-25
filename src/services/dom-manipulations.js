@@ -1,4 +1,4 @@
-import MessageBox from './components/MessageBox'
+import MessageBox from '../components/MessageBox'
 
 export function showResult (result) {
   const { servingSize, foodAmount, proteins, carbs, fats, totalKcals } = result
