@@ -30,8 +30,11 @@ form.onsubmit = event => {
   result.fats *= 9
   showResult({ ...result, totalKcals: getTotalKcals(result) })
 }
-
-const templatesList = (await fetchFruitsList()).items.map(item => new Food(item.name, item.protein_g, item.carbohydrates_total_g, item.fat_total_g))
+const templatesList = []
+fetchFruitsList().then(res => {
+  res.forEach(item => templatesList.push(new Food(item.name, item.protein_g, item.carbohydrates_total_g, item.fat_total_g)))
+  form.insertBefore(ComboBox('p-2', templatesList, onComboBoxChange), form.firstChild)
+})
 function onComboBoxChange (value) {
   if (value !== 'none') {
     const selectedTemplate = templatesList[templatesList.findIndex(item => item.name === value)]
@@ -47,4 +50,3 @@ function onComboBoxChange (value) {
     })
   }
 }
-form.insertBefore(ComboBox('p-2', templatesList, onComboBoxChange), form.firstChild)
